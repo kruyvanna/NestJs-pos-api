@@ -7,6 +7,7 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
+import { Stock } from 'src/stock/schema/stock.schema';
 import { ProductService } from './product.service';
 import { Product } from './schema/product.schema';
 
@@ -42,5 +43,16 @@ export class ProductController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.productService.delete(id);
+  }
+
+  // Stock relation
+  @Post('/:id/add-stock')
+  addStock(@Param('id') id: string, @Body() stock: Stock) {
+    return this.productService.addStock(id, stock);
+  }
+
+  @Post('/with-stocks')
+  getProductWithStocks() {
+    return this.productService.getProductWithStocks();
   }
 }

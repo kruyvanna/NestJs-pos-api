@@ -2,9 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Product, ProductDocument } from './schema/product.schema';
 import { Model } from 'mongoose';
+import { Stock } from 'src/stock/schema/stock.schema';
+import { StockService } from 'src/stock/stock.service';
+import { threadId } from 'worker_threads';
 
 @Injectable()
 export class ProductService {
+  constructor(private readonly stockService: StockService) {}
+
   @InjectModel(Product.name) private model: Model<ProductDocument>;
 
   create(data: Product) {
@@ -28,5 +33,23 @@ export class ProductService {
   }
   delete(id: string) {
     return this.model.findByIdAndRemove(id);
+  }
+
+  async addStock(productId: string, stock: Stock) {
+    const addedStock = await this.stockService.create(stock);
+
+    const updatedProduct = this.model
+      .findByIdAndUpdate(
+        productId,
+        { $addToSet: { stocks: addedStock._id } },
+        { new: true },
+      )
+      .populate('stocks');
+
+    return updatedProduct;
+  }
+
+  getProductWithStocks() {
+    return this.model.find();
   }
 }
