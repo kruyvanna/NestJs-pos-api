@@ -14,6 +14,7 @@ import { AuthModule } from './auth/auth.module';
 import { UserController } from './users/user.controller';
 import { UsersModule } from './users/users.module';
 import { ProductModule } from './product/product.module';
+import { StockModule } from './stock/stock.module';
 
 let environmentPath = '';
 
@@ -65,6 +66,7 @@ console.log('isDev: ', isDev);
     }),
     ConfigModule,
     ProductModule,
+    StockModule,
   ],
   controllers: [AppController, UserController],
   providers: [
