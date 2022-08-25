@@ -9,5 +9,8 @@ export class Stock {
 
   @Prop({ required: true })
   remaining: number;
+
+  @Prop({ required: true })
+  costPerItem: number;
 }
 export const StockSchema = SchemaFactory.createForClass(Stock);
