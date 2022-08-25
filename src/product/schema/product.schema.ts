@@ -5,7 +5,7 @@ import { Stock } from 'src/stock/schema/stock.schema';
 export type ProductDocument = Product & Document;
 @Schema({ timestamps: true })
 export class Product {
-  @Prop({ required: true })
+  @Prop({ required: true, unique: true })
   code: string;
 
   @Prop({ required: true })

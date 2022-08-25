@@ -25,7 +25,7 @@ export class ProductController {
     return this.productService.findAll();
   }
 
-  @Get('/:id')
+  @Get('/id/:id')
   findOne(@Param('id') id: string) {
     return this.productService.findOne(id);
   }
@@ -51,7 +51,7 @@ export class ProductController {
     return this.productService.addStock(id, stock);
   }
 
-  @Post('/with-stocks')
+  @Get('/with-stocks')
   getProductWithStocks() {
     return this.productService.getProductWithStocks();
   }
