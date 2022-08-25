@@ -39,6 +39,8 @@ export class ProductService {
     return this.model.findByIdAndRemove(id);
   }
 
+  // Stock
+
   async addStock(productId: string, stock: Stock) {
     const addedStock = await this.stockService.create(stock);
 
@@ -50,6 +52,19 @@ export class ProductService {
       )
       .populate('stocks');
 
+    return updatedProduct;
+  }
+
+  async removeStock(productId: string, stockId: string) {
+    const updatedProduct = this.model
+      .findByIdAndUpdate(
+        productId,
+        {
+          $pull: { stocks: stockId },
+        },
+        { new: true },
+      )
+      .populate('stocks');
     return updatedProduct;
   }
 

@@ -56,6 +56,14 @@ export class ProductController {
     return this.productService.addStock(id, stock);
   }
 
+  @Delete('/remove-stock/:productId/:stockId')
+  removeStock(
+    @Param('productId') productId: string,
+    @Param('stockId') stockId: string,
+  ) {
+    return this.productService.removeStock(productId, stockId);
+  }
+
   @Get('/with-stocks')
   getProductWithStocks() {
     return this.productService.getProductWithStocks();
