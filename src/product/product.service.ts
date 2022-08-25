@@ -50,6 +50,6 @@ export class ProductService {
   }
 
   getProductWithStocks() {
-    return this.model.find();
+    return this.model.find().populate('stocks');
   }
 }
