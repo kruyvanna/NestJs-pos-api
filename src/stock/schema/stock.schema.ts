@@ -7,7 +7,7 @@ export class Stock {
   @Prop({ required: true })
   count: number;
 
-  @Prop({ required: true })
+  @Prop({ required: true, default: 0 })
   remaining: number;
 
   @Prop({ required: true })
