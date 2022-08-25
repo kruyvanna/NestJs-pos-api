@@ -51,7 +51,7 @@ export class ProductController {
   }
 
   // Stock relation
-  @Post('/:id/add-stock')
+  @Post('/add-stock/:id')
   addStock(@Param('id') id: string, @Body() stock: Stock) {
     return this.productService.addStock(id, stock);
   }
