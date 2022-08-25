@@ -28,6 +28,10 @@ export class ProductService {
     return this.model.findOne({ code: code });
   }
 
+  findByCodeWithStocks(code: string) {
+    return this.model.findOne({ code: code }).populate('stocks');
+  }
+
   update(id: string, product: Product) {
     return this.model.findByIdAndUpdate(id, product, { new: true });
   }

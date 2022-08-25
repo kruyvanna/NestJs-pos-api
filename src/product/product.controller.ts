@@ -35,6 +35,11 @@ export class ProductController {
     return this.productService.findByCode(code);
   }
 
+  @Get('/code-with-stocks/:code')
+  findByCodeWithStock(@Param('code') code: string) {
+    return this.productService.findByCodeWithStocks(code);
+  }
+
   @Patch('/:id')
   update(@Param('id') id: string, @Body() data: Product) {
     return this.productService.update(id, data);
