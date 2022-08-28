@@ -75,4 +75,16 @@ export class ProductService {
   getProductWithStocks() {
     return this.model.find().populate('stocks');
   }
+
+  async getProductsWithLowStock() {
+    const cursor = this.model
+      .aggregate([{ $match: { currentStock: { $lte: 50 } } }])
+      .cursor();
+    const result = [];
+
+    for await (const doc of cursor) {
+      result.push(doc);
+    }
+    return result;
+  }
 }
