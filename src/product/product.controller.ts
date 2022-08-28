@@ -78,4 +78,9 @@ export class ProductController {
   getProductByCodeWithStocks(@Param('code') code: string) {
     return this.productService.findByCodeWithStocks(code);
   }
+
+  @Get('/low-stock')
+  getProductsWithLowStock() {
+    return this.productService.getProductsWithLowStock();
+  }
 }
