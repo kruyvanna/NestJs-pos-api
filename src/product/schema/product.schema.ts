@@ -35,6 +35,9 @@ export class Product {
   @Prop({ required: true })
   pricePerBox: number;
 
+  @Prop({ required: false, default: 0 })
+  currentStock: number;
+
   @Prop([{ type: mongoose.Schema.Types.ObjectId, ref: Stock.name }])
   stocks: [Stock];
 }
