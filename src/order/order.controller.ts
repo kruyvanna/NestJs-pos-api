@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  Res,
 } from '@nestjs/common';
 import { OrderService } from './order.service';
 import { Order } from './schema/order.schema';
@@ -35,8 +36,9 @@ export class OrderController {
   }
 
   @Post('/aggregate-by-day')
-  aggreegateByDay(@Body() data: any) {
+  aggreegateByDay(@Body() data: any, @Res() response: any) {
     const { from, to } = data;
-    return this.orderService.getOrderSummaryByDay(from, to);
+    const cursor = this.orderService.getOrderSummaryByDay(from, to);
+    cursor.pipe(response);
   }
 }

@@ -23,41 +23,39 @@ export class OrderService {
     return this.model.findByIdAndRemove(id);
   }
 
-  async getOrderSummaryByDay(from: string, to: string) {
+  getOrderSummaryByDay(from: string, to: string) {
     console.log('getOrderSummaryByDay :', from, to);
-    // const result = this.model
-    //   .aggregate(
-    //     [
-    //       {
-    //         $match: {
-    //           createdAt: {
-    //             $gte: new Date(from),
-    //             $lte: new Date(to),
-    //           },
-    //         },
-    //       },
-    //       {
-    //         $group: {
-    //           _id: {
-    //             month: { $month: '$createdAt' },
-    //             day: { $dayOfMonth: '$createdAt' },
-    //             year: { $year: '$createdAt' },
-    //           },
-    //           earning: { $sum: '$earning' },
-    //           count: { $sum: 1 },
-    //         },
-    //       },
-    //     ],
-    //     { cursor: { batchSize: 0 } },
-    //   )
-    //   .cursor();
-    // console.log('result', result);
-
-    const result = this.model
-      .aggregate([{ $match: { earning: { $gte: 0 } } }])
+    const cursor = this.model
+      .aggregate(
+        [
+          {
+            $match: {
+              createdAt: {
+                $gte: new Date(from),
+                $lte: new Date(to),
+              },
+            },
+          },
+          {
+            $group: {
+              _id: {
+                month: { $month: '$createdAt' },
+                day: { $dayOfMonth: '$createdAt' },
+                year: { $year: '$createdAt' },
+              },
+              earning: { $sum: '$earning' },
+              count: { $sum: 1 },
+            },
+          },
+        ],
+        { cursor: { batchSize: 0 } },
+      )
       .cursor();
-    for await (const doc of result) {
-      console.log(doc);
-    }
+
+    // for await (const doc of cursor) {
+    //   console.log(doc);
+    // }
+
+    return cursor;
   }
 }
