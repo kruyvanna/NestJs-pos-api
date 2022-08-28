@@ -30,6 +30,11 @@ export class ProductController {
     return this.productService.findOne(id);
   }
 
+  @Get('/id-with-stock/:id')
+  findByIdWithStock(@Param('id') id: string) {
+    return this.productService.findByIdWithStock(id);
+  }
+
   @Get('/code/:code')
   findByCode(@Param('code') code: string) {
     return this.productService.findByCode(code);

@@ -24,6 +24,10 @@ export class ProductService {
     return this.model.findById(id);
   }
 
+  findByIdWithStock(id: string) {
+    return this.model.findById(id).populate('stocks');
+  }
+
   findByCode(code: string) {
     return this.model.findOne({ code: code });
   }
