@@ -43,7 +43,7 @@ export class OrderService {
                 year: { $year: '$createdAt' },
               },
               earning: { $sum: '$earning' },
-              count: { $sum: 1 },
+              receivedMoney: { $sum: '$receivedMoney' },
             },
           },
         ],
