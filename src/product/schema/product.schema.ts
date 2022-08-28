@@ -24,10 +24,10 @@ export class Product {
   pricePerItem: number;
 
   @Prop({ required: true })
-  numberOfItemsInTheBlister;
+  numberOfItemsInTheBlister: number;
 
   @Prop({ required: true })
-  pricePerBlister;
+  pricePerBlister: number;
 
   @Prop({ required: true })
   numberOfItemsInTheBox: number;
