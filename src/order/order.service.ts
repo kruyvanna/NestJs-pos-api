@@ -23,8 +23,7 @@ export class OrderService {
     return this.model.findByIdAndRemove(id);
   }
 
-  getOrderSummaryByDay(from: string, to: string) {
-    console.log('getOrderSummaryByDay :', from, to);
+  async getOrderSummaryByDay(from: string, to: string) {
     const cursor = this.model
       .aggregate(
         [
@@ -52,10 +51,11 @@ export class OrderService {
       )
       .cursor();
 
-    // for await (const doc of cursor) {
-    //   console.log(doc);
-    // }
+    const result = [];
 
-    return cursor;
+    for await (const doc of cursor) {
+      result.push(doc);
+    }
+    return result;
   }
 }

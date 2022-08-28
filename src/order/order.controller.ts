@@ -36,9 +36,8 @@ export class OrderController {
   }
 
   @Post('/aggregate-by-day')
-  aggreegateByDay(@Body() data: any, @Res() response: any) {
+  aggreegateByDay(@Body() data: any) {
     const { from, to } = data;
-    const cursor = this.orderService.getOrderSummaryByDay(from, to);
-    cursor.pipe(response);
+    return this.orderService.getOrderSummaryByDay(from, to);
   }
 }
