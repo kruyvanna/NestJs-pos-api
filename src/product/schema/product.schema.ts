@@ -27,6 +27,9 @@ export class Product {
   numberOfItemsInTheBlister;
 
   @Prop({ required: true })
+  pricePerBlister;
+
+  @Prop({ required: true })
   numberOfItemsInTheBox: number;
 
   @Prop({ required: true })
