@@ -13,5 +13,8 @@ export class Order {
 
   @Prop({ required: true })
   total: number;
+
+  @Prop({ required: true })
+  receivedMoney: number;
 }
 export const OrderSchema = SchemaFactory.createForClass(Order);
