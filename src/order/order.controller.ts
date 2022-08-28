@@ -33,4 +33,10 @@ export class OrderController {
   remove(@Param('id') id: string) {
     return this.orderService.delete(id);
   }
+
+  @Post('/aggregate-by-day')
+  aggreegateByDay(@Body() data: any) {
+    const { from, to } = data;
+    return this.orderService.getOrderSummaryByDay(from, to);
+  }
 }
