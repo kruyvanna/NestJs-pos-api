@@ -63,10 +63,13 @@ export class ProductService {
   }
 
   async removeStock(productId: string, stockId: string) {
+    const stock = await this.stockService.findOne(stockId);
+    const stockCount = -stock.count;
     const updatedProduct = this.model
       .findByIdAndUpdate(
         productId,
         {
+          $inc: { currentStock: stockCount },
           $pull: { stocks: stockId },
         },
         { new: true },
