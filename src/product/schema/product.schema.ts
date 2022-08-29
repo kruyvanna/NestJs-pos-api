@@ -18,9 +18,6 @@ export class Product {
   cost: number;
 
   @Prop({ required: true })
-  costPerItem: number;
-
-  @Prop({ required: true })
   pricePerItem: number;
 
   @Prop({ required: true })
