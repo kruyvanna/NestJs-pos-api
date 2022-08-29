@@ -51,7 +51,10 @@ export class ProductService {
     const updatedProduct = this.model
       .findByIdAndUpdate(
         productId,
-        { $addToSet: { stocks: addedStock._id } },
+        {
+          $inc: { currentStock: stock.count },
+          $addToSet: { stocks: addedStock._id },
+        },
         { new: true },
       )
       .populate('stocks');
