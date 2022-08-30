@@ -36,6 +36,12 @@ export class ProductService {
     return this.model.findOne({ code: code }).populate('stocks');
   }
 
+  findByCodeEndWithIncludeStocks(code: string) {
+    return this.model.findOne({
+      code: new RegExp(code + '$', 'i'),
+    });
+  }
+
   update(id: string, product: Product) {
     return this.model.findByIdAndUpdate(id, product, { new: true });
   }
