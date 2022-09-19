@@ -36,6 +36,7 @@ export class ProductService {
     return this.model.findOne({ code: code }).populate('stocks');
   }
 
+  // find one only
   findByCodeEndWithIncludeStocks(code: string) {
     return this.model
       .findOne({
@@ -96,7 +97,7 @@ export class ProductService {
   }
 
   getProductWithStocks() {
-    return this.model.find().populate('stocks');
+    return this.model.find().limit(100).populate('stocks');
   }
 
   async getProductsWithLowStock() {
