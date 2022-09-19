@@ -44,6 +44,15 @@ export class ProductService {
       .populate('stocks');
   }
 
+  getProductsEndsWithCodeIncludeStocks(code: string) {
+    return this.model
+      .find({
+        code: new RegExp(code + '$', 'i'),
+      })
+      .limit(50)
+      .populate('stocks');
+  }
+
   update(id: string, product: Product) {
     return this.model.findByIdAndUpdate(id, product, { new: true });
   }

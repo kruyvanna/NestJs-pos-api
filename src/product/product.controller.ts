@@ -84,6 +84,11 @@ export class ProductController {
     return this.productService.findByCodeEndWithIncludeStocks(code);
   }
 
+  @Get('/products-by-code-regex-with-stock/:code')
+  getProductsEndsWithCodeNotIncludeStocks(@Param('code') code: string) {
+    return this.productService.getProductsEndsWithCodeIncludeStocks(code);
+  }
+
   @Get('/low-stock')
   getProductsWithLowStock() {
     return this.productService.getProductsWithLowStock();
