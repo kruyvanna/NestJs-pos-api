@@ -11,26 +11,11 @@ export class Product {
   @Prop({ required: true })
   name: string;
 
-  @Prop({ required: false })
-  brandName: string;
-
   @Prop()
   cost: number;
 
   @Prop({ required: true })
   pricePerItem: number;
-
-  @Prop({ required: true })
-  numberOfItemsInTheBlister: number;
-
-  @Prop({ required: true })
-  pricePerBlister: number;
-
-  @Prop({ required: true })
-  numberOfItemsInTheBox: number;
-
-  @Prop({ required: true })
-  pricePerBox: number;
 
   @Prop({ required: false, default: 0 })
   currentStock: number;
