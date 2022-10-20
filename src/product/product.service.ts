@@ -102,7 +102,46 @@ export class ProductService {
 
   async getProductsWithLowStock() {
     const cursor = this.model
-      .aggregate([{ $match: { currentStock: { $lte: 100 } } }])
+      .aggregate([
+        {
+          $lookup: {
+            from: 'stocks',
+            let: {
+              stocks: '$stocks',
+            },
+            pipeline: [
+              {
+                $match: {
+                  $expr: {
+                    $in: ['$_id', '$$stocks'],
+                  },
+                },
+              },
+              {
+                $project: {
+                  _id: 0,
+                  remaining: 1,
+                },
+              },
+            ],
+            as: 'remaining',
+          },
+        },
+        {
+          $set: {
+            remaining: {
+              $sum: '$remaining.remaining',
+            },
+          },
+        },
+        {
+          $match: {
+            remaining: {
+              $lt: 100,
+            },
+          },
+        },
+      ])
       .cursor();
     const result = [];
 
