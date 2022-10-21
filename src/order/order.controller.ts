@@ -35,6 +35,11 @@ export class OrderController {
     return this.orderService.delete(id);
   }
 
+  @Post('/by-date-range')
+  getOrderByDateRange(@Body() data) {
+    return this.orderService.getByDateRange(data.from, data.to);
+  }
+
   @Post('/aggregate-by-day')
   aggreegateByDay(@Body() data: any) {
     const { from, to } = data;

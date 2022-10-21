@@ -23,6 +23,15 @@ export class OrderService {
     return this.model.findByIdAndRemove(id);
   }
 
+  getByDateRange(from, to) {
+    return this.model.find({
+      createdAt: {
+        $gte: new Date(from),
+        $lte: new Date(to),
+      },
+    });
+  }
+
   async getOrderSummaryByDay(from: string, to: string) {
     const cursor = this.model
       .aggregate(
