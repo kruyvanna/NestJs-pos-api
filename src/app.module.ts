@@ -16,6 +16,7 @@ import { UsersModule } from './users/users.module';
 import { ProductModule } from './product/product.module';
 import { StockModule } from './stock/stock.module';
 import { OrderModule } from './order/order.module';
+import { BalanceTransactionModule } from './balance-transaction/balance-transaction.module';
 
 let environmentPath = '';
 
@@ -69,6 +70,7 @@ console.log('isDev: ', isDev);
     ProductModule,
     StockModule,
     OrderModule,
+    BalanceTransactionModule,
   ],
   controllers: [AppController, UserController],
   providers: [
