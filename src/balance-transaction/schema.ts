@@ -10,6 +10,9 @@ export class BalanceTransaction {
 
   @Prop({ required: true })
   amount: number;
+
+  @Prop({ required: true })
+  type: string;
 }
 export const BalanceTransactionSchema =
   SchemaFactory.createForClass(BalanceTransaction);
